@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { LoginService } from './login.service';
 import { User } from '../models/user.model';
 import { UsersService } from '../users.service';
@@ -12,6 +12,8 @@ import { UsersService } from '../users.service';
 export class LoginComponent implements OnInit {
   // public user: User;
   users = [];
+  isVisible = false;
+  lastUserObj: object = {};
   constructor(private usersService: UsersService) {
     this.users = new Array<User>();
   }
@@ -22,7 +24,7 @@ export class LoginComponent implements OnInit {
       console.log('error is', error);
     }
     )
-    this.loadUsers();
+    this.loadUsers();    
   }
   //загрузка пользователей
   private loadUsers() {
@@ -36,6 +38,11 @@ export class LoginComponent implements OnInit {
     this.usersService.createUser(name, age).subscribe((data: any) => {
       console.log(data);
       this.loadUsers();
+      this.lastUserObj = {
+        name: data.name,
+        age: data.age
+      }
+      this.showAlert();
     });
   }
   // удаление пользователя
@@ -44,5 +51,13 @@ export class LoginComponent implements OnInit {
       console.log(data);
       this.loadUsers();
     });
+  }
+  showAlert() {
+    this.isVisible = !this.isVisible;
+    setTimeout(
+      () => {
+        this.isVisible = !this.isVisible;
+      },
+      3000);
   }
 }

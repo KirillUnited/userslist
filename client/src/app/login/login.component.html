@@ -1,36 +1,26 @@
-<!-- <form class="form-signin">
-  <h2 class="form-signin-heading">Please sign in</h2>
-  <label for="inputEmail" class="sr-only">Email address</label>
-  <input name="email" [(ngModel)]="user.username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-  <label for="inputPassword" class="sr-only">Password</label>
-  <input name="password" [(ngModel)]="user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox" value="remember-me"> Remember me
-    </label>
-  </div>
-  <button class="btn btn-lg btn-primary btn-block" (click)="validateLogin()" type="button">Sign in</button>
-</form> -->
 <h2>Список пользователей</h2>
-<form name="userForm">
+<form name="userForm" class="userForm" #userForm="ngForm">
   <input type="hidden" name="id" value="0" />
-  <div class="form-group">
-    <label for="name">Имя:</label>
-    <input class="form-control" name="name" [(ngModel)]="name"/>
+  <div class="form-group form-group--required">
+    <label for="name">Имя:
+      <span [hidden]="nameForm.valid || nameForm.touch" class="alert alert-danger alert--form-valid">Введите Имя.</span>
+    </label>
+    <input class="form-control" id="name" name="name" [(ngModel)]="name" required autofocus #nameForm="ngModel" />
   </div>
   <div class="form-group">
     <label for="age">Возраст:</label>
-    <input class="form-control" name="age" [(ngModel)]="age"/>
+    <input class="form-control" id="age" name="age" [(ngModel)]="age" />
   </div>
   <div class="panel-body">
-    <button type="submit" class="btn btn-sm btn-primary" (click)="saveUser(name, age)">Сохранить</button>
-    <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>
+    <button type="submit" class="userForm_btn btn btn-sm btn-success" (click)="saveUser(name, age); userForm.reset()"
+      [disabled]="!userForm.form.valid">Сохранить</button>
+    <a id="reset" class="userForm_btn btn btn-sm btn-warning" (click)="userForm.reset()">Сбросить</a>
   </div>
 </form>
-<div class="alert alert-success" role="alert">
-  <h4 class="alert-heading">Добавленный пользователь</h4>
-  <p>{{name}}</p>
-  <p class="mb-0">{{age}}</p>
+<div class="alert alert-success alert--user" role="alert" [hidden]="!isVisible">
+  <h4 class="alert-heading">Добавлен новый пользователь!</h4>
+  <p>Имя: {{lastUserObj.name}}</p>
+  <p class="mb-0">Возраст: {{lastUserObj.age}}</p>
 </div>
 <table class="table table-condensed table-striped table-bordered">
   <thead>
@@ -46,7 +36,10 @@
       <td>{{user._id}}</td>
       <td>{{user.name}}</td>
       <td>{{user.age}}</td>
-      <td><input type="button" value="Удалить" (click)="deleteUser(user)" class="btn btn-danger" /></td>
+      <td class="table_td-edit">
+        <input type="button" value="Изменить" (click)="deleteUser(user)" class="table_btn btn btn-sm btn-default" />
+        <input type="button" value="Удалить" (click)="deleteUser(user)" class="table_btn btn btn-sm btn-danger" />
+      </td>
     </tr>
   </tbody>
 </table>

@@ -36,3 +36,36 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.alert--user {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  z-index: 1000;
+}
+.form-group--required {
+  position: relative;
+}
+.alert--form-valid {
+  /* position: absolute; */
+  left: 0;
+  bottom: 0;
+  transform: translate(0, 50%);
+  padding: 2px;
+  margin: 0;
+}
+.table td {
+  width: 25%;
+}
+.userForm_btn:not(:last-child) {
+  vertical-align: top;
+  margin: 0 10px 10px 0;
+}
+.table_btn{
+  margin: 5px;
+}
+.table_td-edit {
+  text-align: center;
+}

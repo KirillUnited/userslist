@@ -17,10 +17,7 @@ export class UsersService {
         };
         return this.http.post(this.URL, this.userObj);
     }
-    deleteUser(id: number){
-        const urlParams = new HttpParams().set("", id.toString());
-        console.log(urlParams);
-        
-        return this.http.delete(this.URL, { params: urlParams});
+    deleteUser(id: number) {
+        return this.http.delete(`${this.URL}/${id}`);
     }
 }
