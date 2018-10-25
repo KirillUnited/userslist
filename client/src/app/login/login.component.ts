@@ -7,7 +7,7 @@ import { UsersService } from '../users.service';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [LoginService]
+  providers: []
 })
 export class LoginComponent implements OnInit {
   // public user: User;
@@ -15,28 +15,34 @@ export class LoginComponent implements OnInit {
   constructor(private usersService: UsersService) {
     this.users = new Array<User>();
   }
-  // validateLogin() {
-  //   if (this.user.username && this.user.password) {
-  //     this.loginService.validateLogin(this.user).subscribe(result => {
-  //       console.log('result is', result);
-  //     }, error => { console.log('error is', error); }
-  //     );
-  //   } else {
-  //     alert('enter user name and password');
-  //   }
-  // }
   ngOnInit() {
-    this.usersService.getUsers().subscribe((response) =>{
-    console.log('response is ', response)}, (error) => {
+    this.usersService.getUsers().subscribe((response) => {
+      console.log('response is ', response)
+    }, (error) => {
       console.log('error is', error);
     }
     )
     this.loadUsers();
   }
-//загрузка пользователей
-private loadUsers() {
-  this.usersService.getUsers().subscribe((data: User[]) => {
-          this.users = data;  
-      });
-}
+  //загрузка пользователей
+  private loadUsers() {
+    this.usersService.getUsers().subscribe((data: any) => {
+      this.users = data;
+    });
+  }
+  // сохраняем пользователя
+  saveUser(name, age) {
+    // добавляем пользователя
+    this.usersService.createUser(name, age).subscribe((data: any) => {
+      console.log(data);
+      this.loadUsers();
+    });
+  }
+  // удаление пользователя
+  deleteUser(user) {
+    this.usersService.deleteUser(user._id).subscribe(data => {
+      console.log(data);
+      this.loadUsers();
+    });
+  }
 }

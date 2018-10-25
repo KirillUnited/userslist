@@ -1,6 +1,6 @@
-<form class="form-signin">
+<!-- <form class="form-signin">
   <h2 class="form-signin-heading">Please sign in</h2>
-  <!-- <label for="inputEmail" class="sr-only">Email address</label>
+  <label for="inputEmail" class="sr-only">Email address</label>
   <input name="email" [(ngModel)]="user.username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
   <input name="password" [(ngModel)]="user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
@@ -9,10 +9,44 @@
       <input type="checkbox" value="remember-me"> Remember me
     </label>
   </div>
-  <button class="btn btn-lg btn-primary btn-block" (click)="validateLogin()" type="button">Sign in</button> -->
+  <button class="btn btn-lg btn-primary btn-block" (click)="validateLogin()" type="button">Sign in</button>
+</form> -->
+<h2>Список пользователей</h2>
+<form name="userForm">
+  <input type="hidden" name="id" value="0" />
+  <div class="form-group">
+    <label for="name">Имя:</label>
+    <input class="form-control" name="name" [(ngModel)]="name"/>
+  </div>
+  <div class="form-group">
+    <label for="age">Возраст:</label>
+    <input class="form-control" name="age" [(ngModel)]="age"/>
+  </div>
+  <div class="panel-body">
+    <button type="submit" class="btn btn-sm btn-primary" (click)="saveUser(name, age)">Сохранить</button>
+    <a id="reset" class="btn btn-sm btn-primary">Сбросить</a>
+  </div>
 </form>
-<ul class="users">
-<li *ngFor="let user of users">
-{{user.name}}-{{user.age}}
-</li>
-</ul>
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Добавленный пользователь</h4>
+  <p>{{name}}</p>
+  <p class="mb-0">{{age}}</p>
+</div>
+<table class="table table-condensed table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Имя</th>
+      <th>возраст</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{user._id}}</td>
+      <td>{{user.name}}</td>
+      <td>{{user.age}}</td>
+      <td><input type="button" value="Удалить" (click)="deleteUser(user)" class="btn btn-danger" /></td>
+    </tr>
+  </tbody>
+</table>

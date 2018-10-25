@@ -7,9 +7,9 @@ const objectId = require("mongodb").ObjectID;
 
 const app = express();
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+// app.use(bodyParser.urlencoded({
+//     extended: false
+// }));
 const url = 'mongodb://list-item-user:user1234@ds135413.mlab.com:35413/list-item';
 
 app.use(express.static(__dirname + "/public"));
@@ -62,6 +62,21 @@ app.get('/api/users', (req, res) => {
     });
 });
 
+app.get("/api/users/:id", function(req, res){
+       
+    var id = new objectId(req.params.id);
+    mongoose.connect(url, function(err, db){
+        const collection = db.collection("users");
+        collection.findOne({_id: id}, function(err, user){
+              
+            if(err) return res.status(400).send();
+              
+            res.send(user);
+            db.close();
+        });
+    });
+});
+
 app.post("/api/users", function (req, res) {
 
     if (!req.body) return res.sendStatus(400);
@@ -90,6 +105,34 @@ app.delete("/api/users/:id", function (req, res) {
         const collection = db.collection("users");
         collection.findOneAndDelete({
             _id: id
+        }, function (err, result) {
+
+            if (err) return res.status(400).send();
+
+            var user = result.value;
+            res.send(user);
+            db.close();
+        });
+    });
+});
+app.put("/api/users", function (req, res) {
+
+    if (!req.body) return res.sendStatus(400);
+    var id = new objectId(req.body.id);
+    var userName = req.body.name;
+    var userAge = req.body.age;
+
+    mongoose.connect(url, function (err, db) {
+        const collection = db.collection("users");
+        collection.findOneAndUpdate({
+            _id: id
+        }, {
+            $set: {
+                age: userAge,
+                name: userName
+            }
+        }, {
+            returnOriginal: false
         }, function (err, result) {
 
             if (err) return res.status(400).send();

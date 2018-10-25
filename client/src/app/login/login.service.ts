@@ -8,11 +8,11 @@ export class LoginService {
  
     }
      
-    validateLogin(user: User){
-        return this.http.post('/api/user/login',{
-            username : user.username,
-            password : user.password
-        })
-    }
+    // validateLogin(user: User){
+    //     return this.http.post('/api/user/login',{
+    //         username : user.username,
+    //         password : user.password
+    //     })
+    // }
  
 }
