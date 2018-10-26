@@ -69,3 +69,6 @@
 .table_td-edit {
   text-align: center;
 }
+pagination-controls {
+  float: right;
+}

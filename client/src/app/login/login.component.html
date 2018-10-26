@@ -3,7 +3,7 @@
   <input type="hidden" name="id" value="0" />
   <div class="form-group form-group--required">
     <label for="name">Имя:
-      <span [hidden]="nameForm.valid || nameForm.touch" class="alert alert-danger alert--form-valid">Введите Имя.</span>
+      <span [hidden]="nameForm.valid || nameForm.touch" class="alert alert-danger alert--form-valid">Введите Имя</span>
     </label>
     <input class="form-control" id="name" name="name" [(ngModel)]="name" required autofocus #nameForm="ngModel" />
   </div>
@@ -15,6 +15,7 @@
     <button type="submit" class="userForm_btn btn btn-sm btn-success" (click)="saveUser(name, age); userForm.reset()"
       [disabled]="!userForm.form.valid">Сохранить</button>
     <a id="reset" class="userForm_btn btn btn-sm btn-warning" (click)="userForm.reset()">Сбросить</a>
+    <pagination-controls (pageChange)="p =$event"></pagination-controls>
   </div>
 </form>
 <div class="alert alert-success alert--user" role="alert" [hidden]="!isVisible">
@@ -43,4 +44,3 @@
     </tr>
   </tbody>
 </table>
-<pagination-controls (pageChange)="p =$event"></pagination-controls>
