@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RootComponent } from './root/root.component';
 import { ROUTING } from './app.routing';
+import {NgxPaginationModule} from 'ngx-pagination';
 import { LoginComponent } from './login/login.component';
 import { UsersService } from './users.service';
 
@@ -16,7 +17,8 @@ import { UsersService } from './users.service';
     BrowserModule,
     ROUTING,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [UsersService],
   bootstrap: [RootComponent]
