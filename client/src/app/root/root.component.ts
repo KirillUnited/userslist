@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./root.component.css']
 })
 export class RootComponent implements OnInit {
-
+  isActive = true;
+  private navbar = [{ "name": "Главная", "link": "" }, { "name": "Настройки", "link": "settings" }];
   constructor() { }
 
   ngOnInit() {
+
   }
 
 }
