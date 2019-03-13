@@ -45,9 +45,11 @@
   margin: 0 auto;
   z-index: 1000;
 }
+
 .form-group--required {
   position: relative;
 }
+
 .alert--form-valid {
   /* position: absolute; */
   left: 0;
@@ -56,19 +58,33 @@
   padding: 2px;
   margin: 0;
 }
+
 .table td {
   width: 25%;
 }
+
 .userForm_btn:not(:last-child) {
   vertical-align: top;
   margin: 0 10px 10px 0;
 }
-.table_btn{
+
+.table_btn {
   margin: 5px;
 }
+
 .table_td-edit {
   text-align: center;
 }
-pagination-controls {
+
+.select-num {
   float: right;
+}
+
+h2 {
+  -ms-hyphenate-limit-chars: 10 4 4;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
 }

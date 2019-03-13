@@ -15,7 +15,14 @@
     <button type="submit" class="userForm_btn btn btn-sm btn-success" (click)="saveUser(name, age); userForm.reset()"
       [disabled]="!userForm.form.valid">Сохранить</button>
     <a id="reset" class="userForm_btn btn btn-sm btn-warning" (click)="userForm.reset()">Сбросить</a>
+    <div class="form-group select-num">
+      <!-- <select class="form-control" name="itemsPerPage" id="itemsPerPage">
+        <option>5</option>
+        <option>10</option>
+        <option>20</option>
+      </select> -->
     <pagination-controls (pageChange)="p =$event"></pagination-controls>
+    </div>
   </div>
 </form>
 <div class="alert alert-success alert--user" role="alert" [hidden]="!isVisible">
@@ -38,7 +45,7 @@
       <td>{{user.name}}</td>
       <td>{{user.age}}</td>
       <td class="table_td-edit">
-        <input type="button" value="Изменить" (click)="deleteUser(user)" class="table_btn btn btn-sm btn-default" />
+        <!-- <input type="button" value="Изменить" (click)="editUser(user)" class="table_btn btn btn-sm btn-default" /> -->
         <input type="button" value="Удалить" (click)="deleteUser(user)" class="table_btn btn btn-sm btn-danger" />
       </td>
     </tr>
